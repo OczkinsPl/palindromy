@@ -1,51 +1,56 @@
 let lpierwsze = []
 let tablica = []
 
-let dzielnik = 0
-let i = 1000;
-while(i<10000){
-    for(j=1;j<=i;j++){
-        if(i%j==0){
-            dzielnik++
-        }
+
+
+function znajdzLiczbyPierwsze() {
+    console.time('sprawdzanie liczb pierwszych')
+    for (i = 10000; i <= 99999; i++) {
+      let jestPierwsza = true
+      for ( j = 2; j * j <= i; j++) {
+        if (i % j === 0) {
+          jestPierwsza = false
+          break
         
+        }
+      }
+      if (jestPierwsza) {
+        lpierwsze.push(i);
+      }
     }
-    if(dzielnik == 2&& i>1000){
-        lpierwsze.push(i)
+    console.timeEnd('sprawdzanie liczb pierwszych')
+    return lpierwsze;
+  }
+  znajdzLiczbyPierwsze()
+  console.log(lpierwsze)
 
+
+
+
+  const mnozenieLiczb = (tab) => {
+    const newTab = []
+    const length = tab.length
+
+    for (let i = 0; i < length - 1; i++) {
+        for (let j = i + 1; j < length; j++) {
+            const liczba = tab[i] * tab[j]
+            if (czyPalindrom(liczba)) {
+                newTab.push(liczba)
+            }
+        }
     }
-i++
-dzielnik=0
 
+    return newTab;
+}
+const czyPalindrom = (liczba) => {
+    const liczbaString = liczba.toString()
+    const halfLength = Math.floor(liczbaString.length / 2)
+
+    return liczbaString === liczbaString.split('').reverse().join('');
 }
 
-
-
-/*const mnozenieLiczb = (tab) => {
-    const lengthTab = tab.length
-    let newTab = []
-    let i = 0
-    let liczba
-    
-    let odwroconaLiczba
-    while(i<=lengthTab-1){
-        for(j=0;j<=lengthTab-1;j++){
-            liczba = tab[i]*tab[j]
-            const liczbaStr =liczba.toString()
-            
-            odwroconaLiczba = liczbaStr.split('').reverse().join('')
-            if(liczba === odwroconaLiczba)
-                {
-                    newTab.push(liczba)
-                } 
-        }
-    }
-    return newTab
-
-}*/
-
-//tablica = mnozenieLiczb(lpierwsze)
-let tabliczka = [1111,2222,3333,4444,5555,6666,78987]
+tablica = mnozenieLiczb(lpierwsze)
+//let tabliczka = [1111,2222,3333,4444,5555,6666,78987]
 const najwiekszyPalindrom = (tab) =>{
     const lengthTab = tab.length
     let max = tab[0]
@@ -58,7 +63,7 @@ const najwiekszyPalindrom = (tab) =>{
     return max;
 
 }
-let maxpalindrom =najwiekszyPalindrom(tabliczka)
+let maxpalindrom =najwiekszyPalindrom(tablica)
 
 console.log(maxpalindrom)
 
@@ -86,7 +91,7 @@ const sprawdzanie = (liczba) =>{
     }
     
     
-    console.log(tablica)
+    
     console.log(tablica2)
     
     
